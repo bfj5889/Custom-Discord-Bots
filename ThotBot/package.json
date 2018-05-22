@@ -1,0 +1,11 @@
+{
+  "name": "thot-bot",
+  "version": "1.0.0",
+  "description": "My own Discord Thot bot",
+  "main": "ThotBot.js",
+  "author": "Brianna Jones <bfj5889@g.rit.edu>",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "jquery": "^3.3.1"
+  }
+}

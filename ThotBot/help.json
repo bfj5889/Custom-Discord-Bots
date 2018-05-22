@@ -1,0 +1,7 @@
+{
+  "commands" : "The current list of commands supported are: \n\n    __** *help <command>**__ - List all of the current commands if no argument is given. If agrument is specified the description for the argument will be listed. Current help arguments are: \n\n startHydration \n stopHydration \n updateHydration \n hydration \n whoAThot \n\n    __** *hyrdation **__ - List all hydration related commands \n\n   __** *startHyrdation <x Minutes> **__ - Starts a hydration reminder for the Discord User \n\n   __** *stopHydration **__ - Stops hydration reminders for the Discord User \n\n    __** *updateHydration <x Minutes> **__ -  Updates the hydration time interval for the Discord User \n\n   __** *whoAThot **__ - Randomly generates a thot \n\n\n\n Command Notes: Commands with <text> are arguments to be supplied with the command.",
+  "startHydration" : "__** *startHydration <x Minutes> **__ - Starts a hydration reminder for the Discord User",
+  "stopHydration" : "__** *stopHydration **__ - Stops hydration reminders for the Discord User",
+  "updateHydration" : "__** *updateHydration <x Minutes> **__ -  Updates the hydration time interval for the Discord User",
+  "whoAThot" : "TBD"
+}

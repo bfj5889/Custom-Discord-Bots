@@ -5,7 +5,7 @@ const $ = require('jquery');
 
 const client = new Discord.Client();
 let hydrationMap = new Map();
-let timerCounter = 0;
+let timerList = [];
 
 
 client.on('ready', () => {
@@ -32,13 +32,17 @@ client.on('message', msg => {
 					break;
 				
 				case 'help':
-					let helpMessage = performHelp(args);
-					msg.reply(helpMessage);
+					let helpMsg = performHelp(args);
+					msg.reply(helpMsg);
 					break;
 				
 				case 'startHydration':
-					let hydrationMessage = startHydration(msg.author, args);
-					msg.author.send(hydrationMessage);
+					let startMsg = startHydration(msg.author, args);
+					msg.author.send(startMsg);
+
+                case 'stopHydration':
+                    let stopMsg = stopHydration(msg.author);
+                    msg.author.send(stopMsg);
 			}
 		}
 	} catch (err) {
@@ -50,8 +54,11 @@ client.login(auth.token);
 
 /**** Helper Functions ****/
 function startHydration(msgAuthor, args) {
-	//TODO: compare string to number, check for possible coercion
-	if (args[0] !== undefined) {
+	//TODO: compare string to number,
+	//TODO: check for possible coercion and add try catch for Discord API promise issues
+    //reinstall node on home cpu to see error
+
+    if (args[0] !== undefined) {
 		if (args[0] == parseInt(args[0])) {
 			let userHydrationData = {
 				"interval": parseInt(args[0]),
@@ -76,20 +83,34 @@ function startHydration(msgAuthor, args) {
 	}
 }
 
+
 function createTimer(msgAuthor) {
-	setInterval(function () {
+	let interval = setInterval(function () {
 		client.fetchUser(msgAuthor.id).then(user => {
 			user.send("Drink some water you thot!");
 			console.log("Sent " + msgAuthor.username + " a message. With her " + hydrationMap.get(msgAuthor.id)['interval'] + " interval");
 		})
 	}, ((parseInt(hydrationMap.get(msgAuthor.id)['interval']) * 60000)));
+	let hydrationData = {
+        "interval": parseInt(hydrationMap.get(msgAuthor.id)['interval']),
+        "id": msgAuthor.id,
+		"timer" : interval
+    };
+	console.log("The timer object: " + interval);
+	console.log("HydrationData : " + hydrationData['timer']);
+	hydrationMap.set(msgAuthor.id, hydrationData);
 }
 
-function initTimer(msgAuthor){
-	client.fetchUser(msgAuthor.id).then(user => {
-		user.send("Drink some water you thot!");
-		console.log("Sent " + msgAuthor.username + " a message. With her " + hydrationMap.get(msgAuthor.id)['interval'] + " interval");
-	})
+function stopHydration(msgAuthor){
+    let timerID = hydrationMap.get(msgAuthor.id);
+    console.log("The timer id: " + timerID);
+    if (timerID !== undefined) {
+        clearInterval(timerID);
+        //hydrationMap.delete(msgAuthor.id);
+        return "Hydration reminder cancelled.";
+    } else {
+        return "Error: No hydration reminder timer found."
+    }
 }
 
 

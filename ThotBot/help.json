@@ -3,6 +3,6 @@
     "startHydration" : "__** $startHydration <x Minutes> **__ - Starts a hydration reminder for the Discord User",
     "stopHydration" : "__** $stopHydration **__ - Stops hydration reminders for the Discord User",
     "updateHydration" : "__** $updateHydration <x Minutes> **__ -  Updates the hydration time interval for the Discord User",
-    "whoAThot" : "TBD"
+    "whoAThot" : "__** $whoAThot **__ - Randomly Generates a thot (currently in development)"
   }
 }

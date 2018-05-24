@@ -127,7 +127,7 @@ function performHelp(args) {
             commandNameString = commandNameString + commandListArray[i][0] + '\n';
             commandDescriptionString = commandDescriptionString + commandListArray[i][1] + '\n';
         }
-        return "The current list of commands are:\n" + commandNameString + "\n" +  commandDescriptionString;
+        return "The current list of commands are:\n" + commandNameString + "\n\n" +  commandDescriptionString;
     } else if (args.length === 1) {
         if (args[0] === "startHydration") {
             return help.commandList.startHydration;

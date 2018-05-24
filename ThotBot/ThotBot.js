@@ -125,7 +125,7 @@ function performHelp(args) {
 
         for (let i = 0; i < commandListArray.length; i++) {
             commandNameString = commandNameString + commandListArray[i][0] + '\n';
-            commandDescriptionString = commandDescriptionString + commandListArray[i][1] + '\n';
+            commandDescriptionString = commandDescriptionString + commandListArray[i][1] + '\n\n';
         }
         return "The current list of commands are:\n" + commandNameString + "\n\n" +  commandDescriptionString;
     } else if (args.length === 1) {

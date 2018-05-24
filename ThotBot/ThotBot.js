@@ -39,10 +39,12 @@ client.on('message', msg => {
 				case 'startHydration':
 					let startMsg = startHydration(msg.author, args);
 					msg.author.send(startMsg);
+					break;
 
                 case 'stopHydration':
                     let stopMsg = stopHydration(msg.author);
                     msg.author.send(stopMsg);
+                    break;
 			}
 		}
 	} catch (err) {
@@ -96,17 +98,17 @@ function createTimer(msgAuthor) {
         "id": msgAuthor.id,
 		"timer" : interval
     };
-	console.log("The timer object: " + interval);
-	console.log("HydrationData : " + hydrationData['timer']);
+	//console.log("The timer object: " + interval);
+	//console.log("HydrationData : " + hydrationData['timer']);
 	hydrationMap.set(msgAuthor.id, hydrationData);
 }
 
 function stopHydration(msgAuthor){
-    let timerID = hydrationMap.get(msgAuthor.id);
-    console.log("The timer id: " + timerID);
-    if (timerID !== undefined) {
-        clearInterval(timerID);
-        //hydrationMap.delete(msgAuthor.id);
+    let timer = hydrationMap.get(msgAuthor.id)['timer'];
+    //console.log("The timer id to stop is: " + timer);
+    if (timer !== undefined) {
+        clearInterval(timer);
+        hydrationMap.delete(msgAuthor.id);
         return "Hydration reminder cancelled.";
     } else {
         return "Error: No hydration reminder timer found."

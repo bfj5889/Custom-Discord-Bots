@@ -72,7 +72,7 @@ function startHydration(msgAuthor, args) {
 
             return "Hydration reminder set for " + args[0] + " minutes. Happy hydration!";
         } else {
-            return "Error: ThotBot expected a number of minutes to start hydration with, but none were given. See `*help startHydration` for a command description.";
+            return "Error: ThotBot expected a whole number of minutes to start hydration with, but none were given. See `*help startHydration` for a command description.";
         }
     } else {
         if (hydrationMap.has(msgAuthor)) {

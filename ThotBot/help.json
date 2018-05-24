@@ -1,8 +1,8 @@
 {
   "commandList": {
-    "startHydration" : "__** $startHydration <x Minutes> **__ - Starts a hydration reminder for the Discord User",
-    "stopHydration" : "__** $stopHydration **__ - Stops hydration reminders for the Discord User",
-    "updateHydration" : "__** $updateHydration <x Minutes> **__ -  Updates the hydration time interval for the Discord User",
-    "whoAThot" : "__** $whoAThot **__ - Randomly Generates a thot (currently in development)"
+    "startHydration" : "__** $startHydration <x Minutes> **__ - Starts a hydration reminder for the Discord User \n example: $startHydration 30 \n The above command will send the user a reminder every 30 minutes.",
+    "stopHydration" : "__** $stopHydration **__ - Stops hydration reminders for the Discord User  \n example: $stopHydration \n The above command will end the currently running reminder.",
+    "updateHydration" : "__** $updateHydration <x Minutes> **__ -  Updates the hydration time interval for the Discord User \n example: $startHydration 20 \n The above command will end the currently running reminder and create a new reminder for every 20 minutes.",
+    "whoAThot" : "__** $whoAThot **__ - Randomly generates a thot (currently in development)"
   }
 }

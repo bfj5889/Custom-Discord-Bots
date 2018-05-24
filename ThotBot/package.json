@@ -5,7 +5,7 @@
   "main": "ThotBot.js",
   "author": "Brianna Jones <bfj5889@g.rit.edu>",
   "repository": "https://github.com/bfj5889/Custom-Discord-Bots/tree/master/ThotBot",
-  "license": "Brianna Jones",
+  "license": "UNLICENSED",
   "dependencies": {
     "discord.js": "^11.3.2",
     "jquery": "^3.3.1"

@@ -75,10 +75,8 @@ function startHydration(msgAuthor, args) {
             return "Error: ThotBot expected a whole number of minutes to start hydration with, but none were given. See `*help startHydration` for a command description.";
         }
     } else {
-        if (hydrationMap.has(msgAuthor)) {
-            let userHydrationData = hydrationMap.get(msgAuthor);
-            let intervalTime = userHydrationData['interval'];
-
+        if (hydrationMap.has(msgAuthor.id)) {
+            createTimer(msgAuthor);
             return "Hydration reminder set for " + intervalTime + " minute(s). Happy hydration!";
         } else {
             return "Error: ThotBot can not find a previous hydration entry for your Discord account. Run the command again with a time interval. See `*help startHydration` for a command description.";
@@ -88,7 +86,7 @@ function startHydration(msgAuthor, args) {
 
 
 function createTimer(msgAuthor) {
-    let interval = setInterval(function () {
+    let timer = setInterval(function () {
         client.fetchUser(msgAuthor.id).then(user => {
             user.send("Drink some water you thot!");
             //console.log("Sent " + msgAuthor.username + " a message. With a " + hydrationMap.get(msgAuthor.id)['interval'] + " interval");
@@ -97,7 +95,7 @@ function createTimer(msgAuthor) {
     let hydrationData = {
         "interval": parseInt(hydrationMap.get(msgAuthor.id)['interval']),
         "id": msgAuthor.id,
-        "timer": interval
+        "timer": timer
     };
     //console.log("The timer object: " + interval);
     //console.log("HydrationData : " + hydrationData['timer']);
@@ -110,7 +108,18 @@ function stopHydration(msgAuthor) {
     if (timer !== undefined) {
         clearInterval(timer);
         hydrationMap.delete(msgAuthor.id);
-        return "Hydration reminder cancelled.";
+        return "Hydration reminder cancelled and interval timer reset.";
+    } else {
+        return "Error: No hydration reminder timer found."
+    }
+}
+
+function pauseHydration(msgAuthor){
+    let timer = hydrationMap.get(msgAuthor.id)['timer'];
+    //console.log("The timer id to stop is: " + timer);
+    if (timer !== undefined) {
+        clearInterval(timer);
+        return "Hydration reminder paused. Use startHydration to restart the timer with " + (hydrationMap(msgAuthor.id)['interval']).toString() + " minutes";
     } else {
         return "Error: No hydration reminder timer found."
     }
@@ -139,6 +148,8 @@ function performHelp(args) {
             return help.commandList.startHydration + '\n\n' + help.commandList.stopHydration + '\n\n' + help.commandList.updateHydration;
         } else if (args[0] === "whoAThot") {
             return help.commandList.whoAThot;
+        } else if (args[0] === "pauseHydration") {
+            return help.commandList.pauseHydration;
         } else {
             return "ThotBot Hydration cannot perform your request. See `*help` to see complete list of commands."
         }
